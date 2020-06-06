@@ -16,7 +16,7 @@ module.exports = {
       'error',
       {
         singleQuote: true,
-        printWidth: 80
+        printWidth: 100
       }
     ]
   }
