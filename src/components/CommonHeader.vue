@@ -4,7 +4,9 @@
       <el-button type="primary" icon="el-icon-menu" size="mini"></el-button>
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
+        <el-breadcrumb-item :to="current.path" v-if="current"
+          >{{ current.label }}
+        </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="r-content">
@@ -22,11 +24,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       userImg: require('../assets/images/user.png')
     };
+  },
+  computed: {
+    ...mapState({
+      current: state => state.tab.currentMenu
+    })
   }
 };
 </script>
@@ -54,8 +62,14 @@ header {
 }
 </style>
 <style lang="scss">
-.el-breadcrumb__inner a,
-.el-breadcrumb__inner.is-link {
-  color: #fff;
+.el-breadcrumb__item {
+  .el-breadcrumb__inner {
+    color: #fff;
+  }
+  &:last-child {
+    .el-breadcrumb__inner {
+      color: #f4f4f4;
+    }
+  }
 }
 </style>
