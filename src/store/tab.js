@@ -1,7 +1,8 @@
 export default {
   state: {
-    menu: [], // 全部菜单
+    isCollapse: false, //是否折叠
     currentMenu: null, //点击菜单
+    menu: [], // 全部菜单
     tabsList: [
       {
         path: '/',
@@ -30,6 +31,10 @@ export default {
       let result = state.tabsList.findIndex(item => item.name === val.name);
       // 删除
       state.tabsList.splice(result, 1);
+    },
+    // 收缩和展开
+    collapseMenu(state) {
+      state.isCollapse = !state.isCollapse;
     }
   },
   actions: {}

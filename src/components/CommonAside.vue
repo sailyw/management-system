@@ -5,6 +5,7 @@
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b"
+    :collapse="isCollapse"
   >
     <el-menu-item
       :index="item.path"
@@ -41,6 +42,9 @@ export default {
     },
     hasChildren() {
       return this.asideMenu.filter(item => item.children);
+    },
+    isCollapse() {
+      return this.$store.state.tab.isCollapse;
     }
   },
   data() {
@@ -50,7 +54,7 @@ export default {
           path: '/',
           name: 'home',
           label: '首页',
-          icon: 'home'
+          icon: 's-home'
         },
         {
           path: '/video',
@@ -98,5 +102,9 @@ export default {
 .el-menu {
   height: 100%;
   border: none;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>
