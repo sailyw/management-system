@@ -15,7 +15,15 @@
         </div>
       </el-card>
       <el-card shadow="hover" style="height:522px;margin-top:20px;">
-        鼠标悬浮时显示
+        <el-table :data="tableData">
+          <el-table-column
+            show-overflow-tooltip
+            v-for="(item, key) in tableLabel"
+            :key="key"
+            :prop="key"
+            :label="val"
+          ></el-table-column>
+        </el-table>
       </el-card>
     </el-col>
     <el-col :span="16">
@@ -90,13 +98,26 @@ export default {
           icon: 's-goods',
           color: '#5ab1ef'
         }
-      ]
+      ],
+      tableData: [],
+      tableLabel: {
+        name: '课程',
+        todayBuy: '今日购买',
+        monthBuy: '本月购买',
+        totalBuy: '总购买'
+      }
     };
   },
-  mounted() {
-    this.$http.get('/home/getData').then(res => {
-      console.log(res.data);
-    });
+  created() {
+    this.getTableData();
+  },
+  methods: {
+    getTableData() {
+      this.$http.get('/home/getData').then(res => {
+        res = res.data;
+        this.tableData = res.data.tableData;
+      });
+    }
   }
 };
 </script>
