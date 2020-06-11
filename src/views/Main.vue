@@ -4,7 +4,9 @@
     <el-container>
       <el-header><common-header></common-header></el-header>
       <common-tab></common-tab>
-      <router-view></router-view>
+      <el-main>
+        <router-view />
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -26,5 +28,8 @@ export default {
 <style lang="scss" scoped>
 .el-header {
   background-color: #333;
+}
+.el-main {
+  padding-top: 0;
 }
 </style>

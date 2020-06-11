@@ -57,7 +57,6 @@ export default {
   }
 };
 </script>
-
 <style lang="scss" scoped>
 .common-table {
   height: calc(100% - 62px);

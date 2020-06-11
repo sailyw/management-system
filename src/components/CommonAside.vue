@@ -1,14 +1,14 @@
 <template>
   <el-menu
+    :collapse="isCollapse"
     :default-active="$route.path"
     class="el-menu-vertical-demo"
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b"
-    :collapse="isCollapse"
   >
-    <h3 v-show="!isCollapse">微微后台管理系统</h3>
-    <h3 v-show="isCollapse">微微</h3>
+    <h3 v-show="isCollapse">小滴</h3>
+    <h3 v-show="!isCollapse">小滴课堂后台管理系统</h3>
     <el-menu-item
       :index="item.path"
       v-for="item in noChildren"
@@ -18,10 +18,10 @@
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{ item.label }}</span>
     </el-menu-item>
-    <el-submenu index="index" v-for="(item, index) in hasChildren" :key="index">
+    <el-submenu :index="item.label" v-for="(item, index) in hasChildren" :key="index">
       <template slot="title">
-        <i class="el-icon-location"></i>
-        <span>{{ item.label }}</span>
+        <i :class="'el-icon-' + item.icon"></i>
+        <span slot="title">{{ item.label }}</span>
       </template>
       <el-menu-item-group>
         <el-menu-item
@@ -42,13 +42,16 @@
 export default {
   computed: {
     noChildren() {
-      return this.asideMenu.filter(item => !item.children);
+      return this.menu.filter(item => !item.children);
     },
     hasChildren() {
-      return this.asideMenu.filter(item => item.children);
+      return this.menu.filter(item => item.children);
     },
     isCollapse() {
       return this.$store.state.tab.isCollapse;
+    },
+    menu() {
+      return this.$store.state.tab.menu;
     }
   },
   data() {
@@ -107,9 +110,9 @@ export default {
   height: 100%;
   border: none;
   h3 {
-    color: #fff;
-    line-height: 48px;
+    color: #ffffff;
     text-align: center;
+    line-height: 48px;
   }
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
